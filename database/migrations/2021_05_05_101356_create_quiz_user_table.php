@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable1 extends Migration
+class CreateQuizUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class CreateUsersTable1 extends Migration
     public function up()
     {
         Schema::create('quiz_user', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->integer('quiz_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
