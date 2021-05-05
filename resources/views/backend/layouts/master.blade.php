@@ -2,7 +2,6 @@
 @include('backend.layouts.sidebar')
 
   @yield('content')
-  
-@include('backend.layouts.footer')
 
+@include('backend.layouts.footer')
 
