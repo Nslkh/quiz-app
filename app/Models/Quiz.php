@@ -20,4 +20,9 @@ class Quiz extends Model
     public function storeQuiz($data){
         return Quiz::create($data);
     }
+
+    public function allQuiz(){
+        return Quiz::all();
+    }
+    
 }
