@@ -62,7 +62,8 @@ class QuizController extends Controller
      */
     public function edit($id)
     {
-        //
+        $quiz = (new Quiz)->getQuizById($id);
+        return view('backend.quiz.edit', compact('quiz'));
     }
 
     /**
@@ -74,7 +75,9 @@ class QuizController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $this->validateForm($request);
+        $quiz = (new Quiz)->updateQuiz($data,$id);
+        return redirect(route('quiz.index'))->with('message','Quiz updated Successfully!');
     }
 
     /**
