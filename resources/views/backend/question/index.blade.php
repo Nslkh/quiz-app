@@ -26,7 +26,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(is_countable($questions) && count($questions) > 0)
+                        @if(is_countable($questions ?? '') && count($questions) > 0)
                         @foreach($questions as $key => $question)
                         <tr>
                             <td>{{ $key+1 }}</td>
@@ -53,7 +53,9 @@
                                         event.preventDefault();
                                 }"><input type="submit" value="Delete" class="btn btn-danger"></a>
                             </td>
+                            <td>
                             
+                            </td>
                         </tr>
                         @endforeach
                         @else

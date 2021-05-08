@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Answer;
 use App\Models\Question;
-use App\Models\Quiz;
+use App\Models\Answer;
 
 class QuestionController extends Controller
 {
@@ -40,8 +39,8 @@ class QuestionController extends Controller
     {
         $data = $this->validateForm($request);
         $question = (new Question)->storeQuestion($data);
-        $Answer = (new Answer)->storeAnswer($data,$question);
-        return redirect()->route('question.create')->with('message','Question created successfully');
+        $answer = (new Answer)->storeAnswer($data, $question);
+        return redirect()->route('question.create')->with('message', 'Question has been created successfully!');
     }
 
     /**
@@ -52,7 +51,8 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $question = (new Question)->getQuestionById($id);
+        return view('backend.question.show', compact('question'));
     }
 
     /**
@@ -63,7 +63,8 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = (new Question)->findQuestion($id);
+        return view('backend.question.edit', compact('question'));
     }
 
     /**
@@ -75,7 +76,10 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $this->validateForm($request);
+        $question = (new Question)->updateQuestion($id, $request);
+        $answer = (new Answer)->updateAnswer($request, $question);
+        return redirect()->route('question.show', $id)->with('message', 'Question has been updated successfully!');
     }
 
     /**
@@ -86,16 +90,18 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        (new Answer)->deleteAnswer($id);
+        (new Question)->deleteQuestion($id);
+        return redirect()->route('question.index')->with('message', 'Question has been deleted successfully!');
     }
 
-    public function validateForm($request){
-        return $this->validate($request, [
-           'quiz'=>'required',
-           'question'=>'required|min:3',
-           'options'=>'bail|required|array|min:3',
-           'options.*'=>'bail|required|string|distinct',
-           'correct_answer'=>'required' 
+    public function validateForm(Request $req) {
+        return $this->validate($req, [
+            'quiz' => 'required',
+            'question' => 'required|min:3',
+            'options' => 'bail|required|array|min:3',
+            'options.*' => 'bail|required|string|distinct',
+            'correct_answer' => 'required' 
         ]);
     }
 }
