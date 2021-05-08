@@ -1,0 +1,86 @@
+@extends('backend.layouts.master')
+
+	@section('title','quiz questions')
+
+	@section('content')
+
+				<div class="span9">
+                    <div class="content">
+
+                    	 <!--foreach-->
+
+                        <div class="module">
+                            <div class="module-head">
+                                
+                                  <h3>Quiz name</h3>
+
+                            </div>
+
+                            <div class="module-body">
+                            	
+
+                            <p><h3  class="heading"></h3></p>
+
+
+                             
+
+                                <div class="module-body table">
+                                     <!--foreach-->
+
+                                    <table class="table table-message">
+                                        <tbody>
+                                           
+                                               
+                                            
+                                            
+                                            <tr class="read">
+                                                 
+                                                 Qestion name
+                                                
+                                                <td class="cell-author hidden-phone hidden-tablet">
+                                                     <!--foreach-->
+                                                        <p>
+                                                            Answer 
+                                                            
+                                                           <span class="badge badge-success"> 
+                                                           </span>
+                                                            
+                                                        </p>
+                                                    <!--endforeach-->
+                                                </td>
+
+                                                
+
+                                               
+                                            </tr>
+                                           
+
+
+                                        </tbody>
+
+                                    </table>
+                                    <!--endforeach-->
+                                </div>
+                              
+                            <!--endforeach-->
+
+                                <div class="module-foot">
+                                <td>
+                                    <a href="{{route('question.index')}}"><button class="btn btn-inverse pull-center">Back</button></a>
+                                 </td>
+                                </div>
+
+                       	
+                            </div>
+                   		</div>
+                		
+                		</div>
+           			 
+           			</div>
+        		</div> 
+
+            </div> 
+            </div> 
+
+
+@endsection
