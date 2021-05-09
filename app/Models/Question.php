@@ -35,4 +35,8 @@ class Question extends Model
     public function getQuestionById($id){
         return Question::find($id);
     }
+
+    public function findQuestion($id){
+        return Question::find($id);
+    }
 }
