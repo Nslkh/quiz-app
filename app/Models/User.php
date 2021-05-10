@@ -79,6 +79,9 @@ class User extends Authenticatable
         $user->address = $data['address'];
         $user->save();
         return $user;
+    }
 
+    public function deleteUser($id){
+        return User::find($id)->delete();
     }
 }

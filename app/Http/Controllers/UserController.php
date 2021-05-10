@@ -43,7 +43,7 @@ class UserController extends Controller
             'password'=>'required|min:3'
         ]);
         $user = (new User)->storeUser($request->all());
-        return redirect()->back()->with('message','User created successfully!');
+        return redirect()->route('user.index')->with('message','User created successfully');
 
     }
 
@@ -94,6 +94,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // if(auth()->user()->id == $id){
+        //     return redirect()->back('message','You can not delete yourself!');
+        // }
+        $user = (new User)->deleteUser($id);
+        return redirect()->route('user.index')->with('message','User deleted successfully');
     }
 }
