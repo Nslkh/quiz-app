@@ -39,4 +39,12 @@ class Question extends Model
     public function findQuestion($id){
         return Question::find($id);
     }
+
+    public function updateQuestion($id,$data){
+        $question = Question::find($id);
+        $question->question = $data['question'];
+        $question->quiz_id = $data['quiz'];
+        $question->save();
+        return $question;
+    }
 }

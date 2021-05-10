@@ -76,10 +76,10 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $this->validateForm($request);
-        $question = (new Question)->updateQuestion($id, $request);
-        $answer = (new Answer)->updateAnswer($request, $question);
-        return redirect()->route('question.show', $id)->with('message', 'Question has been updated successfully!');
+        $data = $this->validateForm($request); 
+        $question = (new Question)->updateQuestion($id, $request); 
+        $answer = (new Answer)->updateAnswer($request, $question); 
+        return redirect()->route('question.show', $id)->with('message', 'Question has been updated successfully!'); 
     }
 
     /**
