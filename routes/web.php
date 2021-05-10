@@ -13,16 +13,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.index');
-});
 
-Auth::routes();
+
+Auth::routes([
+    'register'=>false,
+    'reset'=>false,
+    'verify'=>false
+
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware'=>'isAdmin'], function () {
 
-Route::resource('quiz','QuizController');
-Route::resource('question','QuestionController');
-Route::resource('user','UserController');
+    Route::get('/', function () {
+        return view('admin.index');
+    });
 
-Route::get('/quiz/{id}/questions','QuizController@question')->name('quiz.question');
+
+    Route::resource('quiz','QuizController');
+    Route::resource('question','QuestionController');
+    Route::resource('user','UserController');
+    Route::get('/quiz/{id}/questions','QuizController@question')->name('quiz.question');
+    
+});
+
+
