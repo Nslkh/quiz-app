@@ -30,6 +30,8 @@ class User extends Authenticatable
         'is_admin'
     ];
 
+    private $limit=10;
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -54,5 +56,9 @@ class User extends Authenticatable
         $data['password'] = bcrypt($data['password']);
         $data['is_admin'] = 0;
         return User::create($data);
+    }
+
+    public function allUsers(){
+        return User::latest()->paginate($this->limit);
     }
 }
