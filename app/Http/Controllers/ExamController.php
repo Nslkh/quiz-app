@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
 use App\Models\Result;
@@ -34,5 +35,14 @@ class ExamController extends Controller
             return redirect()->back()->with('message','Exam is now not assigned to that user!');
         }
 
+    }
+
+    public function getQuizQuestions(Request $request,$quizId){
+        $authUser=auth()->user()->id;
+        $quiz = Quiz::find($quizId);
+        $time = Quiz::where('id',$quizId)->value('minutes');
+        $quizQuestions = Question::where('quiz_id',$quizId)->with('answers')->get();
+        $authUserHasPlayedQuiz = Result::where(['user_id'=>$authUser,'quiz_id'=>$quizId])->get();
+        return view('quiz',compact('quiz','time','quizQuestions','authUserHasPlayedQuiz'));
     }
 }
