@@ -15,4 +15,9 @@ class ExamController extends Controller
         $quiz = (new Quiz)->assignExam($request->all());
         return redirect()->back()->with('message','Exam assigned to user successfully!');
     }
+
+    public function userExam(Request $request){
+        $quizzes = Quiz::get();
+        return view('backend.exam.index',compact('quizzes'));
+    }
 }

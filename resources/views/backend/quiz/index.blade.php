@@ -16,7 +16,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Minutes</th>
