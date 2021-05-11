@@ -48,4 +48,13 @@ class Quiz extends Model
         return $quiz->users()->syncWithoutDetaching($userId);
     }
     
+    public function hasQuizAttempted(){
+        $attemptQuiz = [];
+        $authUser = auth()->user()->id;
+        $user = Result::where('user_id',$authUser)->get();
+        foreach($user as $u){
+            array_push($attemptQuiz,$u->$quiz_id);
+        }
+        return $attemptQuiz;
+    }
 }
