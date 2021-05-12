@@ -13,7 +13,12 @@
                             <ol>
                             <li v-for="choice in question.answers">
                                 <label>
-                                    <input type="radio">{{choice.answer}}
+                                    <input type="radio"
+                                    :value="choice.is_correct==true?true:choice.answer"
+                                    :name="index"
+                                    v-model="userResponses[index]"
+                                    @click="choices(question.id)"
+                                    >{{choice.answer}}
                                 </label>
                             </li>
                             </ol>
@@ -22,6 +27,13 @@
                        <button class="btn btn-success float-right" @click="prev()">Prev</button>
                        <button class="btn btn-success" @click="next()">Next</button>
 
+                        <div v-show="questionIndex===questions.length">
+                            <p>
+                                <center>
+                                    You got:{{ score() }}/{{ questions.length }}
+                                </center>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,6 +48,9 @@
             return{
                 questions:this.quizQuestions,
                 questionIndex:0,
+                userResponses:Array(this.quizQuestions.lenght).fill(false),
+                currentQuestion:0,
+                currentAnswer:0
             }
         },
         mounted() {
@@ -43,10 +58,19 @@
         },
         methods:{
             next(){
-                this.questionIndex++
+                this.questionIndex--
             },
             prev(){
-                this.questionIndex--
+                this.questionIndex++
+            },
+            choices(question,answer){
+                this.currentAnser=answer,
+                this.currentQuestion=question
+            },
+            score(){
+                return this.userResponses.filter((val)=>{
+                    return val==true;
+                }).length
             }
         }
     }
