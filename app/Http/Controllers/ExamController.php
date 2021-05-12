@@ -45,4 +45,18 @@ class ExamController extends Controller
         $authUserHasPlayedQuiz = Result::where(['user_id'=>$authUser,'quiz_id'=>$quizId])->get();
         return view('quiz',compact('quiz','time','quizQuestions','authUserHasPlayedQuiz'));
     }
+
+    public function postQuiz(Request $request){
+        $questionId = $request['questionId'];
+        $answerId = $request['answerId'];
+        $quizId = $request['quizId'];
+
+        $authUser = auth()->user();
+
+        return $userQuestionAnswer = Result::updateOrCreate(
+            ['user_id'=>$authUser->id,'quiz_id'=>$quizId,'question_id'=>$questionId],
+            ['answer_id'=>$answerId]
+        );
+
+    }
 }
