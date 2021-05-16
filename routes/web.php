@@ -29,6 +29,8 @@ Route::get('user/quiz/{quizId}', 'ExamController@getQuizQuestions')->middleware(
 // Route::post('quiz/create','ExamController@postQuiz')->middleware('auth');
 Route::post('quiz/create','ExamController@postQuiz')->middleware('auth');
 
+Route::get('result/user/{UserId}/quiz/{quizId}','ExamController@viewResult')->middleware('auth');
+
 Route::group(['middleware'=>'isAdmin'], function () {
 
     Route::get('/', function () {

@@ -70,6 +70,11 @@ class ExamController extends Controller
             ['user_id'=>$authUser->id,'quiz_id'=>$quizId,'question_id'=>$questionId],
             ['answer_id'=>$answerId]
         );
-
     }
+
+    public function viewResult($userId, $quizId) {
+        $results = Result::where('user_id', $userId)->where('quiz_id', $quizId)->get();
+        return view('result-detail', compact('results'));
+    }
+
 }

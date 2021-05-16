@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Model\Answer;
-use App\Model\Question;
+use App\Models\Answer;
+use App\Models\Question;
 
 class Result extends Model
 {
