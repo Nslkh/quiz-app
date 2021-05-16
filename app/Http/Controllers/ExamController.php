@@ -53,7 +53,7 @@ class ExamController extends Controller
 
         //has user played particular quiz
         $wasCompleted = Result::where('user_id',$authUser)->whereIn('quiz_id',(new Quiz)->hasQuizAttempted())->pluck('quiz_id')->toArray();
-        if(in_array($quiz_id,$wasCompleted)){
+        if(in_array($quizId,$wasCompleted)){
             return redirect()->to('/home')->with('error','You already participated in this exam');
         }
         return view('quiz',compact('quiz','time','quizQuestions','authUserHasPlayedQuiz'));

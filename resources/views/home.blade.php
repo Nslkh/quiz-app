@@ -17,13 +17,13 @@
                     <p>Time Allocated:{{ $quiz->minutes }}</p>
                     <p>Number of question:{{ $quiz->questions->count() }}</p>
                     <p>
-                        @if (!in_array($quiz->id,$wasQuizCompleted))
-                            <a href="/quiz/{{ $quiz->id }}">
-                                <button class="btn btn-success">Start Quiz</button>
-                            </a>
+                        <p>
+                            @if(!in_array($quiz->id, $wasQuizCompleted))
+                            <a href="user/quiz/{{ $quiz->id }}"><button class="btn btn-success">Start Quiz</button></a>
                             @else
-                            <span class="float-right">Completed</span>
-                        @endif
+                            <a href="/result/user/{{auth()->user()->id}}/quiz/{{$quiz->id}}">View Result</a>
+                                <span class="float-right">Completed</span>
+                            @endif
                     </p>
                 </div>
                 @endforeach
