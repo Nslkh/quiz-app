@@ -37,11 +37,11 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    User Profile
+                    User Profile 
                 </div>
                 <div class="card-body">
-                    <p>Email: {{ auth()->user()->email }}</p>
-                    <p>Occupation: {{ auth()->user()->occupation }}</p>
+                    <p>Email: {{ auth()->user()->email }}</p> 
+                    <p>Occupation: {{ auth()->user()->occupation }}</p> 
                     <p>Address: {{ auth()->user()->address }}</p>
                     <p>Phone Number: {{ auth()->user()->phone }}</p>
                 </div>
