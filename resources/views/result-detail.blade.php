@@ -12,7 +12,7 @@
           <div class="card-body">
             <p>
               <h2>
-                {{ $result->question->question }}
+                {{ $result->question->question ?? '' }}
               </h2>
             </p>
             @php
@@ -23,14 +23,15 @@
               }
             @endphp 
             <p>
-    					<mark>Your Answer: {{ $result->answer }}</mark>
-    				</p> 
+    					<mark>Your Answer: {{ $result->answer->answer }}</mark>
+    				</p>
             @php
     					$correctAnswers = DB::table('answers')->where('question_id', $result->question_id)->where('is_correct', 1)->get();
     					foreach($correctAnswers as $ans) {
                 echo "Correct Answer: " . $ans->answer;
     				    }
     				@endphp  
+            
             @if($result->answer->is_correct)
             <p>
               <span class="badge badge-success">Result: Correct</span>
@@ -39,7 +40,8 @@
             <p>
               <span class="badge badge-danger">Result: Incorrect</span>
             </p>	
-          @endif        
+          @endif
+                  
           </div>
         </div>
       </div>
